@@ -1,36 +1,24 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet"
-          href="{% static 'bootstrap/css/bootstrap.min.css' %}">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Lista de Compras</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+{% extends 'base.html' %}
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="{% url 'product_list_route' %}">Home</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-<main class="container">
-    <h1>Product List</h1>
-    <p>{{ product.description }}</p>
-    <p>{{ product.brand }}</p>
-    <p>{{ product }}</p>
-</main>
+{% block content %}
 
-</body>
-</html>
+<h1>Lista de Produtos</h1>
+{% for product in products %}
+
+    <div class="card-header">
+        {{ product.id }}
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">{{ product.description }}</h5>
+        {% if product.brand  %}
+            <p class="card-text">{{ product.brand }}</p>
+        {% endif %}
+        <hr>
+        <a href="{% url 'edit_product_route' product.id %}">Alterar</a>
+        <a href="{% url 'remove_product_route' product.id %}">Remover</a>
+    </div>
+
+{% endfor %}
+
+{% endblock content %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load my_filters %}
+
+{% block content %}
+<form  method="post">
+    {% csrf_token %}
+     <div class="form-group">
+        {{ form_product.description.errors }}
+         <!-- erros transmitidos pelo backend -->
+        <label>Descrição: </label>
+        {{ form_product.description | add_class:'form-control' }}
+    </div>
+    <div class="form-group">
+        {{ form_product.brand.errors }}
+        <label>Marca: </label>
+        {{ form_product.brand | add_class:'form-control' }}
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Salvar">
+    </div>
+</form>
+{% endblock content %}

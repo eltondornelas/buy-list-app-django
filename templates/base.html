@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet"
+          href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="{% url 'product_list_route' %}">Lista de
+            Compras</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link"
+                       href="{% url 'product_list_route' %}">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link"
+                       href="{% url 'register_product_route' %}">Registrar
+                        Produto</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <main class="container">
+        {% block content %}
+        {% endblock content %}
+    </main>
+</body>
+</html>
