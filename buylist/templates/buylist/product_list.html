@@ -2,23 +2,29 @@
 
 {% block content %}
 
-<h1>Lista de Produtos</h1>
-{% for product in products %}
-
-    <div class="card-header">
-        {{ product.id }}
-    </div>
-
-    <div class="card-body">
-        <h5 class="card-title">{{ product.description }}</h5>
-        {% if product.brand  %}
-            <p class="card-text">{{ product.brand }}</p>
-        {% endif %}
-        <hr>
-        <a href="{% url 'edit_product_route' product.id %}">Alterar</a>
-        <a href="{% url 'remove_product_route' product.id %}">Remover</a>
-    </div>
-
-{% endfor %}
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Descrição</th>
+        <th>Marca</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for product in products %}
+    <tr>
+        <td>{{ product.id }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.brand }}</td>
+        <td>
+            <a href="{% url 'edit_product_route' product.id %}">Alterar</a>
+        </td>
+        <td>
+            <a href="{% url 'remove_product_route' product.id %}">Remover</a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
 {% endblock content %}
