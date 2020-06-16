@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>Listas de Compras</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Nome</td>
+        </tr>
+    </thead>
+    <tbody>
+    {% for buylist in buylists %}
+        <tr>
+            <td>{{ buylist.id}} </td>
+            <td>
+                <a href="{% url 'buylist_list_itens_route' buylist.id %}">
+                    {{ buylist.name }}</a>
+            </td>
+            <td>
+                <a href="{% url 'edit_buylist_route' buylist.id %}">
+                    Alterar</a>
+            </td>
+            <td>
+                <a href="{% url 'remove_buylist_route' buylist.id %}">
+                    Remover</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+{% endblock content %}

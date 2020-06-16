@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import ProductForm
-from .models import Product
-from .services import product_service
+from ..forms import ProductForm
+from ..models import Product
+from ..services import product_service
 
 
 def product_list(request):
@@ -56,5 +56,6 @@ def remove_product(request, id):
         product_service.remove_product(product_db)
         return redirect('product_list_route')
 
-    return render(request, 'buylist/confirmation.html',
+    return render(request, 'buylist/remove_product_confirmation.html',
                   {'product': product_db})
+

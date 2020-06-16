@@ -15,7 +15,11 @@
     <tr>
         <td>{{ product.id }}</td>
         <td>{{ product.description }}</td>
-        <td>{{ product.brand }}</td>
+        {% if product.brand %}
+            <td>{{ product.brand }}</td>
+        {% else %}
+            <td>_</td>
+        {% endif %}
         <td>
             <a href="{% url 'edit_product_route' product.id %}">Alterar</a>
         </td>

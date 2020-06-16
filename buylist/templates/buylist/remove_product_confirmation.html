@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3><b>Tem certeza que deseja remover o produto abaixo?</b></h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Marca</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.brand }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Remover</button>
+</form>
+
+{% endblock content%}

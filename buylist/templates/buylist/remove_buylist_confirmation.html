@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3><b>Tem certeza que deseja remover a lista de compras abaixo?</b></h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{ buylist.id }}</td>
+            <td>{{ buylist.name }}</td>
+        </tr>
+    </tbody>
+</table>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Remover</button>
+</form>
+{% endblock content%}
