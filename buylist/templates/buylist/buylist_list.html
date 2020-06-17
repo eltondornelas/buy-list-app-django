@@ -19,11 +19,11 @@
                     {{ buylist.name }}</a>
             </td>
             <td>
-                <a href="{% url 'edit_buylist_route' buylist.id %}">
+                <a class="btn btn-primary" href="{% url 'edit_buylist_route' buylist.id %}">
                     Alterar</a>
             </td>
             <td>
-                <a href="{% url 'remove_buylist_route' buylist.id %}">
+                <a class="btn btn-danger" href="{% url 'remove_buylist_route' buylist.id %}">
                     Remover</a>
             </td>
         </tr>

@@ -21,10 +21,10 @@
             <td>_</td>
         {% endif %}
         <td>
-            <a href="{% url 'edit_product_route' product.id %}">Alterar</a>
+            <a class="btn btn-primary" href="{% url 'edit_product_route' product.id %}">Alterar</a>
         </td>
         <td>
-            <a href="{% url 'remove_product_route' product.id %}">Remover</a>
+            <a class="btn btn-danger" href="{% url 'remove_product_route' product.id %}">Remover</a>
         </td>
     </tr>
     {% endfor %}

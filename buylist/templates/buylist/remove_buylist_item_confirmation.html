@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h3><b>Tem certeza que deseja remover o item abaixo?</b></h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Quantidade</th>
+            <th>Unidade</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.product.description }}</td>
+            <td>{{ item.amount }}</td>
+            <td>{{ item.unit }}</td>
+        </tr>
+    </tbody>
+</table>
+<form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger" type="submit">Remover</button>
+</form>
+{% endblock content%}

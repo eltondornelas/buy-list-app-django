@@ -22,4 +22,8 @@ urlpatterns = [
          name='buylist_list_itens_route'),
     path('register_buylist_itens/<int:id>', register_buylist_itens,
          name='register_buylist_itens_route'),
+    path('edit_buylist_itens/<int:id>', edit_buylist_itens,
+         name='edit_buylist_itens_route'),
+    path('remove_buylist_itens/<int:id>', remove_buylist_itens,
+         name='remove_buylist_itens_route')
 ]

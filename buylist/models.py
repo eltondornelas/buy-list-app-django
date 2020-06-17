@@ -8,7 +8,7 @@ class Product(models.Model):
                              blank=True)
 
     def __str__(self):
-        return f'{self.description} - {self.brand}'
+        return f'{self.description} - {self.brand or ""}'
 
 
 class BuyList(models.Model):
@@ -31,8 +31,8 @@ class BuyListItem(models.Model):
                                blank=False)
     unit = models.CharField(max_length=10, verbose_name='Unidade', null=False,
                             blank=False)
-    notes = models.TextField(verbose_name='Observações', null=False,
-                             blank=False)
+    notes = models.TextField(verbose_name='Observações', null=True,
+                             blank=True)
 
     def __str__(self):
-        return f'{self.buylist.id}'
+        return f'Item da Lista: {self.buylist.name} de Produto: {self.product.description}'
