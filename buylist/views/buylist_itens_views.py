@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from ..forms import BuyListItemForm
 from ..models import BuyListItem
@@ -8,10 +9,14 @@ from ..services import buylist_service
 @login_required()
 def buylist_list_itens(request, id):
     buylist_db = buylist_service.buylist_list_id(id)
-    buylist_item_db = buylist_service.list_itens_by_buylist(buylist_db)
 
-    # current_path = str(request.get_full_path())
-    #  no template: {{ request.get_full_path }}
+    # achei necessário aqui por conta da url ter <id> e era possível acessar
+    # a página direto pela url, mesmo que não mostrasse dados
+    if buylist_db.user != request.user:
+        return HttpResponse('Não Permitido!')
+
+    buylist_item_db = buylist_service.list_itens_by_buylist(buylist_db,
+                                                            request.user)
 
     return render(request, 'buylist/buylist_list_itens.html',
                   {'buylist_itens': buylist_item_db,
@@ -20,17 +25,15 @@ def buylist_list_itens(request, id):
 
 @login_required()
 def register_buylist_itens(request, id):
-    if request.method == 'POST':
-        # print(request.POST['buylist'])
-        form_buylist_itens = BuyListItemForm(request.POST)
-        print('cheguei aqui 1')
+    buylist_db = buylist_service.buylist_list_id(id)
 
-        # TODO: digitando pela url/x ele abre o formulário, ajustar!
+    if buylist_db.user != request.user:
+        return HttpResponse('Não Permitido!')
+
+    if request.method == 'POST':
+        form_buylist_itens = BuyListItemForm(request.POST)
 
         if form_buylist_itens.is_valid():
-            print('cheguei aqui 2')
-            # buylist = form_buylist_itens.cleaned_data['buylist']
-
             buylist = buylist_service.buylist_list_id(id)
 
             product = form_buylist_itens.cleaned_data['product']
@@ -40,7 +43,7 @@ def register_buylist_itens(request, id):
 
             new_buylist_item = BuyListItem(buylist=buylist, product=product,
                                            amount=amount, unit=unit,
-                                           notes=notes)
+                                           notes=notes, user=request.user)
 
             buylist_service.register_buylist_itens(new_buylist_item)
             return redirect('buylist_list_itens_route', buylist.id)
@@ -55,6 +58,10 @@ def register_buylist_itens(request, id):
 @login_required()
 def edit_buylist_itens(request, id):
     buylist_item_db = buylist_service.item_by_id(id)
+
+    if buylist_item_db.user != request.user:
+        return HttpResponse('Não Permitido!')
+
     form_buylist_itens = BuyListItemForm(request.POST or None,
                                          instance=buylist_item_db)
 
@@ -78,6 +85,9 @@ def edit_buylist_itens(request, id):
 @login_required()
 def remove_buylist_itens(request, id):
     buylist_item_db = buylist_service.item_by_id(id)
+
+    if buylist_item_db.user != request.user:
+        return HttpResponse('Não Permitido!')
 
     if request.method == 'POST':
         buylist_id = buylist_item_db.buylist.id

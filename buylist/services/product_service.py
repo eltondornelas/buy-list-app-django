@@ -3,11 +3,11 @@ from ..models import Product
 
 def register_product(product):
     Product.objects.create(description=product.description,
-                           brand=product.brand)
+                           brand=product.brand, user=product.user)
 
 
-def product_list():
-    return Product.objects.all()
+def product_list(user):
+    return Product.objects.filter(user=user).all()
     # SELECT * FROM buylist_product
 
 

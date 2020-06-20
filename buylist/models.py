@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -6,6 +7,13 @@ class Product(models.Model):
                                    verbose_name='Descrição')
     brand = models.CharField(max_length=24, verbose_name='Marca', null=True,
                              blank=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+
+    # null=True por conta de já existir dados no db, ou teria que enviar um
+    # valor default para não ocorrer problema com os dados já existentes
+    # TODO: alterar para campo obrigatório depois
+
+    # TODO: incluir campo 'section'
 
     def __str__(self):
         return f'{self.description} - {self.brand or ""}'
@@ -13,12 +21,14 @@ class Product(models.Model):
 
 class BuyList(models.Model):
     name = models.CharField(max_length=48, null=False, blank=False)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
 
 
 class BuyListItem(models.Model):
+    # TODO: alterar nome para 'item'
     buylist = models.ForeignKey(BuyList, on_delete=models.CASCADE, null=True,
                                 blank=True, verbose_name='Lista de Compras')
     # buylist permite ser nulo, pois será automaticamente preenchido na lógica
@@ -33,6 +43,7 @@ class BuyListItem(models.Model):
                             blank=False)
     notes = models.TextField(verbose_name='Observações', null=True,
                              blank=True)
+    user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'Item da Lista: {self.buylist.name} de Produto: {self.product.description}'

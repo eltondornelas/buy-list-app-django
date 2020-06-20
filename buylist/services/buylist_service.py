@@ -3,11 +3,11 @@ from ..models import BuyList, BuyListItem
 
 
 def register_buylist(buylist):
-    BuyList.objects.create(name=buylist.name)
+    BuyList.objects.create(name=buylist.name, user=buylist.user)
 
 
-def buylist_list():
-    return BuyList.objects.all()
+def buylist_list(user):
+    return BuyList.objects.filter(user=user).all()
 
 
 def buylist_list_id(id):
@@ -23,8 +23,8 @@ def remove_buylist(buylist_db):
     buylist_db.delete()
 
 
-def list_itens_by_buylist(buylist_item):
-    return BuyListItem.objects.filter(buylist=buylist_item)
+def list_itens_by_buylist(buylist_item, user):
+    return BuyListItem.objects.filter(buylist=buylist_item, user=user).all()
 
 
 def item_by_id(id):

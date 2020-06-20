@@ -1,7 +1,8 @@
 class Product:
-    def __init__(self, description, brand):
+    def __init__(self, description, brand, user):
         self.__description = description
         self.__brand = brand
+        self.__user = user
 
     @property
     def description(self):
@@ -18,3 +19,11 @@ class Product:
     @brand.setter
     def brand(self, brand):
         self.__brand = brand
+
+    @property
+    def user(self):
+        return self.__user
+
+    @user.setter
+    def user(self, user):
+        self.__user = user

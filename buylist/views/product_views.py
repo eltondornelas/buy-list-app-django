@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from ..forms import ProductForm
 from ..models import Product
@@ -7,7 +8,7 @@ from ..services import product_service
 
 @login_required()
 def product_list(request):
-    products = product_service.product_list()
+    products = product_service.product_list(request.user)
     return render(request, 'buylist/product_list.html', {'products': products})
 
 
@@ -21,7 +22,8 @@ def register_product(request):
             description = form_product.cleaned_data['description']
             brand = form_product.cleaned_data['brand']
 
-            new_product = Product(description=description, brand=brand)
+            new_product = Product(description=description, brand=brand,
+                                  user=request.user)
             product_service.register_product(new_product)
 
             return redirect('product_list_route')
@@ -36,6 +38,11 @@ def register_product(request):
 @login_required()
 def edit_product(request, id):
     product_db = product_service.product_list_id(id)
+
+    if product_db.user != request.user:
+        return HttpResponse('Não Permitido!')
+        # TODO: criar uma página mais decente aqui
+
     form_product = ProductForm(request.POST or None, instance=product_db)
     # lembrando que a partir daqui é após ser clicado para atualizar
 
@@ -55,6 +62,9 @@ def edit_product(request, id):
 @login_required()
 def remove_product(request, id):
     product_db = product_service.product_list_id(id)
+
+    if product_db.user != request.user:
+        return HttpResponse('Não Permitido!')
 
     if request.method == 'POST':
         product_service.remove_product(product_db)

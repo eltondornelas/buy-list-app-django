@@ -1,12 +1,16 @@
 from django.contrib import admin
 from django.urls import path
+from django.views.generic import RedirectView
+
 from .views.product_views import *
 from .views.buylist_views import *
 from .views.buylist_itens_views import *
 from .views.user_views import *
 
-
 urlpatterns = [
+    # path('', RedirectView.as_view(url='/buylist_list/')),
+    path('', buylist_list),
+
     path('register_product/', register_product, name='register_product_route'),
     path('product_list/', product_list, name='product_list_route'),
     path('edit_product/<int:id>', edit_product, name='edit_product_route'),
