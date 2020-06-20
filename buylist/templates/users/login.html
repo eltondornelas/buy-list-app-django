@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load my_filters %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+
+    {% for message in messages %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="form-group">
+        {{ form_login.username.errors }}
+        <label>Nome de usuário: </label>
+        {{ form_login.username | add_class:'form-control' }}
+    </div>
+
+    <div class="form-group">
+        {{ form_user.password1.errors }}
+        <label>Senha: </label>
+        {{ form_login.password | add_class:'form-control' }}
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Entrar" class="btn btn-primary">
+    </div>
+</form>
+
+{% endblock content %}

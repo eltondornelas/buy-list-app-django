@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from ..forms import BuyListItemForm
 from ..models import BuyListItem
 from ..services import buylist_service
 
 
+@login_required()
 def buylist_list_itens(request, id):
     buylist_db = buylist_service.buylist_list_id(id)
     buylist_item_db = buylist_service.list_itens_by_buylist(buylist_db)
@@ -16,6 +18,7 @@ def buylist_list_itens(request, id):
                    'buylist_id': id})
 
 
+@login_required()
 def register_buylist_itens(request, id):
     if request.method == 'POST':
         # print(request.POST['buylist'])
@@ -49,6 +52,7 @@ def register_buylist_itens(request, id):
                   {'form_buylist_itens': form_buylist_itens})
 
 
+@login_required()
 def edit_buylist_itens(request, id):
     buylist_item_db = buylist_service.item_by_id(id)
     form_buylist_itens = BuyListItemForm(request.POST or None,
@@ -71,6 +75,7 @@ def edit_buylist_itens(request, id):
                   {'form_buylist_itens': form_buylist_itens})
 
 
+@login_required()
 def remove_buylist_itens(request, id):
     buylist_item_db = buylist_service.item_by_id(id)
 

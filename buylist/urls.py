@@ -3,6 +3,7 @@ from django.urls import path
 from .views.product_views import *
 from .views.buylist_views import *
 from .views.buylist_itens_views import *
+from .views.user_views import *
 
 
 urlpatterns = [
@@ -25,5 +26,9 @@ urlpatterns = [
     path('edit_buylist_itens/<int:id>', edit_buylist_itens,
          name='edit_buylist_itens_route'),
     path('remove_buylist_itens/<int:id>', remove_buylist_itens,
-         name='remove_buylist_itens_route')
+         name='remove_buylist_itens_route'),
+
+    path('register_user/', register_user, name='register_user_route'),
+    path('login_user/', login_user, name='login_user_route'),
+    path('logout_user/', logout_user, name='logout_user_route'),
 ]

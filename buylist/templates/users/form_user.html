@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load my_filters %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form_user.username.errors }}
+        <label>Nome de usuário: </label>
+        {{ form_user.username | add_class:'form-control' }}
+    </div>
+
+    <div class="form-group">
+        {{ form_user.password1.errors }}
+        <label>Senha: </label>
+        {{ form_user.password1 | add_class:'form-control' }}
+    </div>
+
+    <div class="form-group">
+        {{ form_user.password2.errors }}
+        <label>Nome de usuário: </label>
+        {{ form_user.password2 | add_class:'form-control' }}
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Cadastrar" class="btn btn-primary">
+    </div>
+</form>
+{% endblock content %}
