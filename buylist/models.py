@@ -7,13 +7,13 @@ class Product(models.Model):
                                    verbose_name='Descrição')
     brand = models.CharField(max_length=24, verbose_name='Marca', null=True,
                              blank=True)
+    section = models.CharField(max_length=48, null=True, blank=True,
+                               verbose_name='Seção')
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
 
     # null=True por conta de já existir dados no db, ou teria que enviar um
     # valor default para não ocorrer problema com os dados já existentes
     # TODO: alterar para campo obrigatório depois
-
-    # TODO: incluir campo 'section'
 
     def __str__(self):
         return f'{self.description} - {self.brand or ""}'

@@ -16,13 +16,14 @@ def product_list(request):
 def register_product(request):
     if request.method == 'POST':
         form_product = ProductForm(request.POST)
-        # quando passa o parâmetro ele já verifica/valida automaticamente
 
         if form_product.is_valid():
             description = form_product.cleaned_data['description']
             brand = form_product.cleaned_data['brand']
+            section = form_product.cleaned_data['section']
 
             new_product = Product(description=description, brand=brand,
+                                  section=section,
                                   user=request.user)
             product_service.register_product(new_product)
 
@@ -44,14 +45,14 @@ def edit_product(request, id):
         # TODO: criar uma página mais decente aqui
 
     form_product = ProductForm(request.POST or None, instance=product_db)
-    # lembrando que a partir daqui é após ser clicado para atualizar
 
     if form_product.is_valid():
         description = form_product.cleaned_data['description']
         brand = form_product.cleaned_data['brand']
+        section = form_product.cleaned_data['section']
+        new_product = Product(description=description, brand=brand,
+                              section=section, user=request.user)
 
-        new_product = Product(description=description, brand=brand)
-        # importante sempre escrever param = arg, pois causou erro, sem ele
         product_service.edit_product(product_db, new_product)
         return redirect('product_list_route')
 

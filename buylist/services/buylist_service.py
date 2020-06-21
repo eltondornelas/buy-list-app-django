@@ -36,7 +36,8 @@ def register_buylist_itens(buylist_item):
                                product=buylist_item.product,
                                amount=buylist_item.amount,
                                unit=buylist_item.unit,
-                               notes=buylist_item.notes)
+                               notes=buylist_item.notes,
+                               user=buylist_item.user)
 
 
 def edit_buylist_item(buylist_item_db, new_buylist_item):

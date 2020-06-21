@@ -8,6 +8,7 @@
         <th>ID</th>
         <th>Descrição</th>
         <th>Marca</th>
+        <th>Setor</th>
     </tr>
     </thead>
     <tbody>
@@ -15,8 +16,15 @@
     <tr>
         <td>{{ product.id }}</td>
         <td>{{ product.description }}</td>
+
         {% if product.brand %}
             <td>{{ product.brand }}</td>
+        {% else %}
+            <td>_</td>
+        {% endif %}
+
+        {% if product.section %}
+            <td>{{ product.section }}</td>
         {% else %}
             <td>_</td>
         {% endif %}

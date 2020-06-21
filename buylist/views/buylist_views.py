@@ -44,7 +44,7 @@ def edit_buylist(request, id):
     if form_buylist.is_valid():
         name = form_buylist.cleaned_data['name']
 
-        new_buylist = BuyList(name=name)
+        new_buylist = BuyList(name=name, user=request.user)
         buylist_service.edit_buylist(buylist_db, new_buylist)
 
         return redirect('buylist_list_route')

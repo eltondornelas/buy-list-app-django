@@ -31,7 +31,7 @@ def register_buylist_itens(request, id):
         return HttpResponse('Não Permitido!')
 
     if request.method == 'POST':
-        form_buylist_itens = BuyListItemForm(request.POST)
+        form_buylist_itens = BuyListItemForm(request.user, request.POST)
 
         if form_buylist_itens.is_valid():
             buylist = buylist_service.buylist_list_id(id)
@@ -49,7 +49,7 @@ def register_buylist_itens(request, id):
             return redirect('buylist_list_itens_route', buylist.id)
 
     else:
-        form_buylist_itens = BuyListItemForm()
+        form_buylist_itens = BuyListItemForm(request.user)
 
     return render(request, 'buylist/form_buylist_itens.html',
                   {'form_buylist_itens': form_buylist_itens})
@@ -62,7 +62,7 @@ def edit_buylist_itens(request, id):
     if buylist_item_db.user != request.user:
         return HttpResponse('Não Permitido!')
 
-    form_buylist_itens = BuyListItemForm(request.POST or None,
+    form_buylist_itens = BuyListItemForm(request.user, request.POST or None,
                                          instance=buylist_item_db)
 
     if form_buylist_itens.is_valid():
@@ -73,7 +73,8 @@ def edit_buylist_itens(request, id):
         notes = form_buylist_itens.cleaned_data['notes']
 
         new_buylist_item = BuyListItem(buylist=item.buylist, product=product,
-                                       amount=amount, unit=unit, notes=notes)
+                                       amount=amount, unit=unit, notes=notes,
+                                       user=request.user)
 
         buylist_service.edit_buylist_item(buylist_item_db, new_buylist_item)
         return redirect('buylist_list_itens_route', item.buylist.id)

@@ -12,6 +12,7 @@
             <td><b>Marca</b></td>
             <td><b>Quantidade</b></td>
             <td><b>Unidade</b></td>
+            <td><b>Setor</b></td>
             <td><b>Observações</b></td>
         </tr>
     </thead>
@@ -21,14 +22,28 @@
         <tr>
             <td>{{ item.id }}</td>
             <td>{{ item.product.description }}</td>
-            <td>{{ item.product.brand }}</td>
+
+            {% if item.product.brand %}
+                <td>{{ item.product.brand }}</td>
+            {% else %}
+                <td>_</td>
+            {% endif %}
+
             <td>{{ item.amount }}</td>
             <td>{{ item.unit }}</td>
+
+            {% if item.product.section %}
+                <td>{{ item.product.section }}</td>
+            {% else %}
+                <td>_</td>
+            {% endif %}
+
             {% if item.notes %}
                 <td>{{ item.notes }}</td>
             {% else %}
                 <td>_</td>
             {% endif %}
+
             <td>
                 <a class="btn btn-primary" href="{% url 'edit_buylist_itens_route' item.id %}">
                     Alterar</a>

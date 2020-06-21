@@ -19,6 +19,10 @@ class BuyListForm(forms.ModelForm):
 
 
 class BuyListItemForm(forms.ModelForm):
+    def __init__(self, user, *args, **kwargs):
+        super(BuyListItemForm, self).__init__(*args, **kwargs)
+        self.fields['product'].queryset = Product.objects.filter(user=user)
+
     class Meta:
         model = BuyListItem
         exclude = ('user',)
