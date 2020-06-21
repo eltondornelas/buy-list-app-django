@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a class="btn" href="{% url 'register_buylist_itens_route' buylist_id %}">
+<a class="btn" href="{% url 'register_item_route' buylist_id %}">
     Adicionar Item</a>
 
 <table class="table">
@@ -18,7 +18,7 @@
     </thead>
 
     <tbody>
-    {% for item in buylist_itens %}
+    {% for item in items %}
         <tr>
             <td>{{ item.id }}</td>
             <td>{{ item.product.description }}</td>
@@ -45,11 +45,13 @@
             {% endif %}
 
             <td>
-                <a class="btn btn-primary" href="{% url 'edit_buylist_itens_route' item.id %}">
+                <a class="btn btn-primary"
+                   href="{% url 'edit_item_route' item.id %}">
                     Alterar</a>
             </td>
             <td>
-                <a class="btn btn-danger" href="{% url 'remove_buylist_itens_route' item.id %}">
+                <a class="btn btn-danger"
+                   href="{% url 'remove_item_route' item.id %}">
                     Remover</a>
             </td>
         </tr>

@@ -27,13 +27,9 @@ class BuyList(models.Model):
         return self.name
 
 
-class BuyListItem(models.Model):
-    # TODO: alterar nome para 'item'
+class Item(models.Model):
     buylist = models.ForeignKey(BuyList, on_delete=models.CASCADE, null=True,
                                 blank=True, verbose_name='Lista de Compras')
-    # buylist permite ser nulo, pois será automaticamente preenchido na lógica
-    # do views, sem ser dessa forma ele não passa no is_valid()
-
     product = models.ForeignKey(Product, on_delete=models.CASCADE,
                                 verbose_name='Produto', null=False,
                                 blank=False)

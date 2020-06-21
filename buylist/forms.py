@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product, BuyList, BuyListItem
+from .models import Product, BuyList, Item
 
 
 class ProductForm(forms.ModelForm):
@@ -18,12 +18,12 @@ class BuyListForm(forms.ModelForm):
         fields = '__all__'
 
 
-class BuyListItemForm(forms.ModelForm):
+class ItemForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
-        super(BuyListItemForm, self).__init__(*args, **kwargs)
+        super(ItemForm, self).__init__(*args, **kwargs)
         self.fields['product'].queryset = Product.objects.filter(user=user)
 
     class Meta:
-        model = BuyListItem
+        model = Item
         exclude = ('user',)
         fields = '__all__'

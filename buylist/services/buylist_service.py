@@ -1,5 +1,4 @@
-import buylist
-from ..models import BuyList, BuyListItem
+from ..models import BuyList
 
 
 def register_buylist(buylist):
@@ -21,34 +20,3 @@ def edit_buylist(buylist_db, new_buylist):
 
 def remove_buylist(buylist_db):
     buylist_db.delete()
-
-
-def list_itens_by_buylist(buylist_item, user):
-    return BuyListItem.objects.filter(buylist=buylist_item, user=user).all()
-
-
-def item_by_id(id):
-    return BuyListItem.objects.get(id=id)
-
-
-def register_buylist_itens(buylist_item):
-    BuyListItem.objects.create(buylist=buylist_item.buylist,
-                               product=buylist_item.product,
-                               amount=buylist_item.amount,
-                               unit=buylist_item.unit,
-                               notes=buylist_item.notes,
-                               user=buylist_item.user)
-
-
-def edit_buylist_item(buylist_item_db, new_buylist_item):
-    buylist_item_db.buylist = new_buylist_item.buylist
-    buylist_item_db.product = new_buylist_item.product
-    buylist_item_db.amount = new_buylist_item.amount
-    buylist_item_db.unit = new_buylist_item.unit
-    buylist_item_db.notes = new_buylist_item.notes
-
-    buylist_item_db.save(force_update=True)
-
-
-def remove_buylist_item(buylist_item_db):
-    buylist_item_db.delete()

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h3><b>Tem certeza que deseja remover o item abaixo?</b></h3>
 <table class="table">
     <thead>
@@ -25,4 +26,5 @@
     {% csrf_token %}
     <button class="btn btn-danger" type="submit">Remover</button>
 </form>
+
 {% endblock content%}
