@@ -1,26 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<a class="btn" href="{% url 'register_item_route' buylist_id %}">
-    Adicionar Item</a>
+<div class="row col-12 mt-1">
+    <h4 class="m-auto">Lista de Itens</h4>
+</div>
+
+<div class="row">
+    <a class="btn btn-success m-3"
+       href="{% url 'register_item_route' buylist_id %}">Adicionar Item</a>
+
+    <a class="btn btn-info m-3" href="{% url 'buylist_list_route' %}">
+        Listas de Compras</a>
+
+    <a class="btn btn-warning m-3" href="{% url 'product_list_route' %}">
+        Listar Produtos</a>
+</div>
 
 <table class="table">
+    {% if items %}
     <thead>
         <tr>
-            <td><b>ID</b></td>
-            <td><b>Produto</b></td>
-            <td><b>Marca</b></td>
-            <td><b>Quantidade</b></td>
-            <td><b>Unidade</b></td>
-            <td><b>Setor</b></td>
-            <td><b>Observações</b></td>
+            <th></th>
+            <th>#</th>
+            <th>Produto</th>
+            <th>Marca</th>
+            <th>Quantidade</th>
+            <th>Unidade</th>
+            <th>Setor</th>
+            <th>Observações</th>
+            <th></th>
         </tr>
     </thead>
+    {% endif %}
 
     <tbody>
     {% for item in items %}
         <tr>
-            <td>{{ item.id }}</td>
+            <td><input type="checkbox" name="" id=""></td>
+            <td>{{ forloop.counter }}</td>
             <td>{{ item.product.description }}</td>
 
             {% if item.product.brand %}
@@ -45,14 +62,11 @@
             {% endif %}
 
             <td>
-                <a class="btn btn-primary"
-                   href="{% url 'edit_item_route' item.id %}">
-                    Alterar</a>
-            </td>
-            <td>
-                <a class="btn btn-danger"
-                   href="{% url 'remove_item_route' item.id %}">
-                    Remover</a>
+                <a class="btn btn-primary p-2"
+                   href="{% url 'edit_item_route' item.id %}">Alterar</a>
+
+                <a class="btn btn-danger p-2"
+                   href="{% url 'remove_item_route' item.id %}">Remover</a>
             </td>
         </tr>
     {% endfor %}

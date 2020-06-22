@@ -1,29 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row col-12 mt-1">
+    <h4 class="m-auto">Listas de Compras</h4>
+</div>
 
-<h3>Listas de Compras</h3>
+<div class="row">
+    <a class="btn btn-info m-3" href="{% url 'register_buylist_route' %}">
+        Adicionar Lista</a>
+
+    <a class="btn btn-warning m-3" href="{% url 'product_list_route' %}">
+        Listar Produtos</a>
+</div>
+
 <table class="table">
+    {% if buylists %}
     <thead>
         <tr>
-            <td>ID</td>
-            <td>Nome</td>
+            <th>#</th>
+            <th>Nome</th>
+            <th></th>
+            <th></th>
         </tr>
     </thead>
+    {% endif %}
+
     <tbody>
     {% for buylist in buylists %}
         <tr>
-            <td>{{ buylist.id}} </td>
+            <td>{{ forloop.counter }} </td>
             <td>
                 <a href="{% url 'item_list_route' buylist.id %}">
                     {{ buylist.name }}</a>
             </td>
             <td>
+                <a class="btn btn-success"
+                   href="{% url 'item_list_route' buylist.id %}">
+                    Listar Itens</a>
+
                 <a class="btn btn-primary"
                    href="{% url 'edit_buylist_route' buylist.id %}">
                     Alterar</a>
-            </td>
-            <td>
+
                 <a class="btn btn-danger"
                    href="{% url 'remove_buylist_route' buylist.id %}">
                     Remover</a>

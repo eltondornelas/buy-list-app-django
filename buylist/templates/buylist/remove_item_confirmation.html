@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="row col-12 mt-4">
+    <h4>
+        <b>Tem certeza que deseja remover o item abaixo?</b>
+    </h4>
+</div>
 
-<h3><b>Tem certeza que deseja remover o item abaixo?</b></h3>
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Descrição</th>
             <th>Quantidade</th>
             <th>Unidade</th>
@@ -15,7 +18,6 @@
 
     <tbody>
         <tr>
-            <td>{{ item.id }}</td>
             <td>{{ item.product.description }}</td>
             <td>{{ item.amount }}</td>
             <td>{{ item.unit }}</td>
@@ -25,6 +27,8 @@
 <form method="post">
     {% csrf_token %}
     <button class="btn btn-danger" type="submit">Remover</button>
+     <a class="btn btn-success"
+        href="{% url 'item_list_route' item.buylist.id %}">Voltar</a>
 </form>
 
 {% endblock content%}

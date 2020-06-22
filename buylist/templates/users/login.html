@@ -2,6 +2,7 @@
 {% load my_filters %}
 
 {% block content %}
+
 <form method="post">
     {% csrf_token %}
 
@@ -11,7 +12,7 @@
         </div>
     {% endfor %}
 
-    <div class="form-group">
+    <div class="form-group mt-4">
         {{ form_login.username.errors }}
         <label>Nome de usuário: </label>
         {{ form_login.username | add_class:'form-control' }}
@@ -25,6 +26,8 @@
 
     <div class="form-group">
         <input type="submit" value="Entrar" class="btn btn-primary">
+         <a class="btn btn-primary"
+                   href="{% url 'register_user_route' %}">Cadastrar</a>
     </div>
 </form>
 

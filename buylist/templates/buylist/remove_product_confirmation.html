@@ -2,11 +2,15 @@
 
 {% block content %}
 
-<h3><b>Tem certeza que deseja remover o produto abaixo?</b></h3>
+<div class="row col-12 mt-4">
+    <h4 class="m-auto">
+        <b>Tem certeza que deseja remover o produto abaixo?</b>
+    </h4>
+</div>
+
 <table class="table">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Descrição</th>
             <th>Marca</th>
             <th>Setor</th>
@@ -15,10 +19,19 @@
 
     <tbody>
         <tr>
-            <td>{{ product.id }}</td>
             <td>{{ product.description }}</td>
-            <td>{{ product.brand }}</td>
-            <td>{{ product.section }}</td>
+
+            {% if product.brand %}
+                <td>{{ product.brand }}</td>
+            {% else %}
+                <td>_</td>
+            {% endif %}
+
+            {% if product.section %}
+                <td>{{ product.section }}</td>
+            {% else %}
+                <td>_</td>
+            {% endif %}
         </tr>
     </tbody>
 </table>
@@ -26,6 +39,8 @@
 <form method="post">
     {% csrf_token %}
     <button class="btn btn-danger" type="submit">Remover</button>
+    <a class="btn btn-warning" href="{% url 'product_list_route' %}">
+        Voltar</a>
 </form>
 
 {% endblock content%}

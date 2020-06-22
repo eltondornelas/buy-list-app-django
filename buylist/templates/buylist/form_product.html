@@ -4,10 +4,9 @@
 {% block content %}
 <form  method="post">
     {% csrf_token %}
-     <div class="form-group">
+     <div class="form-group mt-4">
         {{ form_product.description.errors }}
-         <!-- erros transmitidos pelo backend -->
-        <label>Descrição: </label>
+        <label>Descrição do Produto: </label>
         {{ form_product.description | add_class:'form-control' }}
     </div>
     <div class="form-group">
@@ -21,7 +20,9 @@
         {{ form_product.section | add_class:'form-control' }}
     </div>
     <div class="form-group">
-        <input type="submit" value="Salvar">
+        <input class="btn btn-primary" type="submit" value="Adicionar Produto">
+        <a class="btn btn-warning" href="{% url 'product_list_route' %}">
+        Voltar</a>
     </div>
 </form>
 {% endblock content %}

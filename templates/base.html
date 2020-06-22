@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Lista de Compras</title>
     <link rel="stylesheet"
           href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a class="navbar-brand" href="{% url 'product_list_route' %}">Lista de
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <a class="navbar-brand" href="{% url 'buylist_list_route' %}">Lista de
             Compras</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 data-target="#navbarSupportedContent"
@@ -19,30 +19,21 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav">
+                {% if 'login_user' in request.path or 'register_user' in request.path %}
                 <li class="nav-item active">
                     <a class="nav-link"
-                       href="{% url 'product_list_route' %}">Listar Produtos</a>
+                       href="{% url 'login_user_route' %}">Login</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link"
-                       href="{% url 'register_product_route' %}">Registrar
-                        Produto</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link"
-                       href="{% url 'buylist_list_route' %}">Listar Lista de
-                        Compras</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link"
-                       href="{% url 'register_buylist_route' %}">Registrar
-                        Lista de Compras</a>
-                </li>
+                {% endif %}
+            </ul>
+             <ul class="navbar-nav">
+                {% if 'login_user' not in request.path and 'register_user' not in request.path %}
                 <li class="nav-item active">
                     <a class="nav-link"
                        href="{% url 'logout_user_route' %}">Logout</a>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </nav>

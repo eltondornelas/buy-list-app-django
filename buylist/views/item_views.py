@@ -48,7 +48,7 @@ def register_item(request, id):
         form_item = ItemForm(request.user)
 
     return render(request, 'buylist/form_item.html',
-                  {'form_item': form_item})
+                  {'form_item': form_item, 'buylist_id': id})
 
 
 @login_required()
@@ -75,7 +75,7 @@ def edit_item(request, id):
         return redirect('item_list_route', item.buylist.id)
 
     return render(request, 'buylist/form_item.html',
-                  {'form_item': form_item})
+                  {'form_item': form_item, 'buylist_id': item_db.buylist.id})
 
 
 @login_required()

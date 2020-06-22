@@ -4,7 +4,7 @@
 {% block content %}
 <form method="post">
     {% csrf_token %}
-    <div class="form-group">
+    <div class="form-group mt-4">
         {{ form_user.username.errors }}
         <label>Nome de usuário: </label>
         {{ form_user.username | add_class:'form-control' }}
@@ -18,12 +18,14 @@
 
     <div class="form-group">
         {{ form_user.password2.errors }}
-        <label>Nome de usuário: </label>
+        <label>Confirme a Senha: </label>
         {{ form_user.password2 | add_class:'form-control' }}
     </div>
 
     <div class="form-group">
         <input type="submit" value="Cadastrar" class="btn btn-primary">
+        <a class="btn btn-primary"
+                   href="{% url 'login_user_route' %}">Voltar</a>
     </div>
 </form>
 {% endblock content %}
