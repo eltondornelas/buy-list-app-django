@@ -15,6 +15,9 @@ class Product(models.Model):
     # valor default para não ocorrer problema com os dados já existentes
     # TODO: alterar para campo obrigatório depois
 
+    class Meta:
+        ordering = ['description']
+
     def __str__(self):
         return f'{self.description} - {self.brand or ""}'
 
@@ -40,6 +43,9 @@ class Item(models.Model):
     notes = models.TextField(verbose_name='Observações', null=True,
                              blank=True)
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+
+    class Meta:
+        ordering = ['product']
 
     def __str__(self):
         return f'Item da Lista: {self.buylist.name} de Produto: {self.product.description}'

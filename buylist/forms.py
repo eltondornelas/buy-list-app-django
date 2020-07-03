@@ -5,17 +5,19 @@ from .models import Product, BuyList, Item
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ('user',)
+        fields = ['description', 'brand', 'section']
+        # exclude = ('user',)
         # dessa forma só mantem o controle no backend, não fica no form
         # não há necessidade de incluir no formulário por segurança
-        fields = '__all__'
+        # fields = '__all__'
 
 
 class BuyListForm(forms.ModelForm):
     class Meta:
         model = BuyList
-        exclude = ('user',)
-        fields = '__all__'
+        fields = ['name']
+        # exclude = ('user',)
+        # fields = '__all__'
 
 
 class ItemForm(forms.ModelForm):
@@ -25,5 +27,6 @@ class ItemForm(forms.ModelForm):
 
     class Meta:
         model = Item
-        exclude = ('user',)
-        fields = '__all__'
+        fields = ['product', 'amount', 'unit', 'notes', 'buylist']
+        # exclude = ('user',)
+        # fields = '__all__'
