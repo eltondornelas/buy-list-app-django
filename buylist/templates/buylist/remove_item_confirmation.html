@@ -28,7 +28,7 @@
     {% csrf_token %}
     <button class="btn btn-danger" type="submit">Remover</button>
      <a class="btn btn-success"
-        href="{% url 'item_list_route' item.buylist.id %}">Voltar</a>
+        href="{{ request.META.HTTP_REFERER }}">Voltar</a>
 </form>
 
 {% endblock content%}

@@ -39,7 +39,7 @@
 <form method="post">
     {% csrf_token %}
     <button class="btn btn-danger" type="submit">Remover</button>
-    <a class="btn btn-warning" href="{% url 'product_list_route' %}">
+    <a class="btn btn-warning" href="{{ request.META.HTTP_REFERER }}">
         Voltar</a>
 </form>
 
